@@ -44,9 +44,9 @@ table {
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   min-height: 100vh;
   padding: 20px;
+  background: linear-gradient(135deg, #667eea 0%, #362845 100%);
 }
 
 .main {
@@ -56,7 +56,6 @@ body {
   justify-content: center;
   width: 100%;
   height: 100%;
-  background: rebeccapurple;
 }
 
 .main .header {
@@ -68,7 +67,6 @@ body {
   height: 100px;
   margin-bottom: 40px;
   color: white;
-  background: magenta;
 }
 
 .main .header h1 {
@@ -103,12 +101,6 @@ body {
 
 .main .content .upload-section > * {
   flex: 1;
-}
-
-@media (max-width: 768px) {
-  .main .content .upload-section {
-    flex-direction: column;
-  }
 }
 
 .main .content .upload-section .upload-card, 
@@ -197,8 +189,15 @@ body {
   box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
 
-.process-btn {
-  background: linear-gradient(45deg, #667eea, #764ba2);
+.main .content .process-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+}
+
+.main .content .process-section .process-btn {
+  background: linear-gradient(45deg, #667eea, #4a3264);
   color: white;
   border: none;
   padding: 15px 40px;
@@ -214,13 +213,175 @@ body {
   box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
 }
 
-.process-btn:hover {
+.main .content .process-section .process-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
 }
 
-.process-btn:disabled {
+.main .content .process-section .process-btn:disabled {
   opacity: 0.7;
   cursor: not-allowed;
   transform: none;
+}
+
+.main .content .loading-section {
+  display: none;
+  text-align: center;
+  padding: 20px;
+}
+
+.main .content .spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #667eea;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 15px;
+}
+
+.main .content .results-section {
+  display: flex;
+  animation: fadeIn 0.5s ease;
+}
+
+.main .content .results-section .result {
+  border: 1px solid #eee;
+  border-radius: 10px;
+  padding: 20px;
+  background: #fafafa;
+}
+
+.main .content .results-section .result .result-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.main .content .results-section .result .classification-badge {
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.main .content .results-section .result .classified-productive {
+  background: #d4edda;
+  color: #155724;
+}
+
+.main .content .results-section .result .classified-unproductive {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.main .content .results-section .result .confidence-meter {
+  margin-bottom: 20px;
+}
+
+.main .content .results-section .result .meter {
+  width: 100%;
+  height: 10px;
+  background: #eee;
+  border-radius: 5px;
+  margin: 10px 0;
+  overflow: hidden;
+}
+
+.main .content .results-section .result .meter-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #d63031, #28a745);
+  border-radius: 5px;
+  transition: width 0.3s ease;
+}
+
+.main .content .results-section .result .suggested-response {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  margin: 15px 0 0 0;
+  min-height: 100px;
+  white-space: pre-wrap;
+}
+
+.main .content .results-section .result .copy-suggestion {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 80px;
+}
+
+.main .content .results-section .result .copy-suggestion .btn-copy {
+  background: linear-gradient(45deg, #28a745 0%, #227034 100%);
+  color: white;
+  border: none;
+  padding: 15px 40px;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 20px auto;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.main .content .results-section .result .copy-suggestion .btn-copy:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+}
+
+.main .content .examples-section {
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 50px);
+  margin-top: 30px;
+  padding: 25px;
+  background: rgba(102, 126, 234, 0.05);
+  border: 1px solid rgba(102, 126, 234, 0.1);
+  border-radius: 10px;  
+}
+
+.main .content .examples-section h3 {
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.main .content .examples-section .ex-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;  
+}
+
+.main .content .examples-section .ex-buttons .ex-btn {
+  background: white;
+  border: 1px solid #667eea;
+  color: #667eea;
+  padding: 8px 15px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: all 0.2s ease;
+}
+
+.main .content .examples-section .ex-buttons .ex-btn:hover {
+  background: #667eea;
+  color: white;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@media (max-width: 768px) {
+  .main .content .upload-section {
+    flex-direction: column;
+  }
 }
