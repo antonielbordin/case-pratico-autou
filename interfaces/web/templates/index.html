@@ -4,13 +4,89 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Classificador de Emails</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css">
     <style>
     
     </style>
 </head>
 <body>
-  <h1>Classificador Inteligente de Emails</h1>
-
+  <main class="main">
+    <header class="main-header">
+      <h1>📧 Email Classifier AI</h1>
+      <p>Classificação Inteligente e Respostas Automáticas para Emails Corporativos</p>
+    </header>
+    <section class="main-card">
+      <section class="upload-section">
+        <div class="upload-card">
+          <h3>
+            <svg class="icon" viewBox="0 0 24 24">
+              <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z" />
+            </svg>
+            Upload de Arquivo
+          </h3>
+          <div class="file-input-wrapper">
+            <input type="file" id="fileInput" class="file-input" accept=".txt,.pdf">
+            <label for="fileInput" class="file-input-label">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="#ccc">
+                <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z" />
+              </svg>
+              <span>Clique para selecionar um arquivo</span>
+              <small>Formatos aceitos: <b>.txt</b>, <b>.pdf</b></small>
+            </label>
+          </div>
+          <div id="fileInfo" class="file-info" style="display: none;"></div>
+        </div>
+        <div class="text-card">
+            <h3>
+                <svg class="icon" viewBox="0 0 24 24">
+                    <path d="M3,3H21V5H3V3M3,7H15V9H3V7M3,11H21V13H3V11M3,15H15V17H3V15M3,19H21V21H3V19Z" />
+                </svg>
+                Inserir Texto Diretamente
+            </h3>
+            <textarea id="emailText" class="email-textarea" placeholder="Cole aqui o conteúdo do email que deseja classificar..."></textarea>
+        </div>
+      </section>      
+      
+      <button id="processBtn" class="process-btn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M9,22A1,1 0 0,1 8,21V18H4A2,2 0 0,1 2,16V4C2,2.89 2.9,2 4,2H20A2,2 0 0,1 22,4V16A2,2 0 0,1 20,18H13.9L10.2,21.71C10,21.9 9.75,22 9.5,22H9M10,16V19.08L13.08,16H20V4H4V16H10Z" />
+        </svg>
+        Processar Email
+      </button>
+      
+      <div id="loading" class="loading">
+        <div class="spinner"></div>
+        <p>Processando email com IA...</p>
+      </div>
+      
+      <section id="results" class="results">
+        <section class="result-item">
+          <div class="result-label">
+            🏷️ Classificação:
+          </div>
+          <span id="classification" class="classification"></span>
+        </section>          
+        <section class="result-item">
+          <div class="result-label">
+            🤖 Resposta Sugerida:
+          </div>
+          <div id="suggestedResponse" class="response-text"></div>
+        </section>
+      </section>
+      
+      <div id="error" class="error" style="display: none;"></div>
+      
+      <section class="examples">
+        <h3>💡 Exemplos para Testar:</h3>
+        <div class="example-buttons">
+          <button class="example-btn" onclick="loadExample('produtivo1')">Solicitação de Suporte</button>
+          <button class="example-btn" onclick="loadExample('produtivo2')">Status de Processo</button>
+          <button class="example-btn" onclick="loadExample('improdutivo1')">Felicitações</button>
+          <button class="example-btn" onclick="loadExample('improdutivo2')">Agradecimento</button>
+        </div>
+      </section>
+    </section>
+  </main>
   <script></script>
 </body>
 </html>
