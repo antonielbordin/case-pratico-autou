@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "5000:5008"
+    environment:
+      - FLASK_ENV=production
+      - HF_API_KEY=${HF_API_KEY}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - DEFAULT_CLASSIFIER=fallback
+      - DEFAULT_RESPONSE_GENERATOR=template
+    volumes:
+      - .:/app
+    restart: unless-stopped

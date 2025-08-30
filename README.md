@@ -1,2 +1,2 @@
-# case-pratico-autou
-Vivenciando  na prática uma simulação simplificada de um projeto real da AutoU
+# case-practice-autou
+Experiencing in practice a simplified simulation of a real AutoU project
