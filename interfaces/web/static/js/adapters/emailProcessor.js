@@ -6,13 +6,16 @@ export async function processEmailInput(file, text) {
   }
 
   let emailContent = '';
+  let typeEmail = '';
   if (file) {
     emailContent = await readFile(file);
+    typeEmail = 'file'
   } else {
     emailContent = text;
+    typeEmail = 'text'
   }
 
-  return classifyEmail(emailContent);
+  return classifyEmail(emailContent, typeEmail);
 }
 
 function readFile(file) {
