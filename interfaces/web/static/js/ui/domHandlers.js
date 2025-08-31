@@ -34,3 +34,15 @@ export function displayResults(result) {
   results.style.display = 'block';
   results.scrollIntoView({ behavior: 'smooth' });
 }
+
+export function updateFooterYear() {
+  const yearSpan = document.getElementById("toDate");
+  if (!yearSpan) return;
+
+  const createdYear = 2025;
+  const currentYear = new Date().getFullYear();
+
+  yearSpan.textContent = currentYear === createdYear
+    ? createdYear
+    : `${createdYear} - ${currentYear}`;
+}
