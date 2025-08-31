@@ -27,7 +27,7 @@ export async function classifyEmail(content, typeEmail) {
     return {
       classification: result.classification,
       confidence: result.confidence,
-      suggestedResponse: generateResponse(result.classification === 'Produtivo', content)
+      suggestedResponse: result.suggestedResponse
     };
 
   } catch (error) {

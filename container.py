@@ -4,7 +4,7 @@ from core.ports.response_generation import ResponseGenerator
 from infrastructure.adapters.huggingface_classifier import HuggingFaceClassifier
 from infrastructure.adapters.fallback_classifier import FallbackClassifier
 from infrastructure.adapters.openai_response_generator import OpenAiResponseGenerator
-from infrastructure.adapters.template_response_generator import TemplateResponseGenerator
+from infrastructure.adapters.fallback_response_generator import FallbackResponseGenerator
 from config.settings import DEFAULT_CLASSIFIER, DEFAULT_RESPONSE_GENERATOR
 
 class Container(containers.DeclarativeContainer):
@@ -17,7 +17,7 @@ class Container(containers.DeclarativeContainer):
     huggingface_classifier = providers.Factory(HuggingFaceClassifier)
     fallback_classifier = providers.Factory(FallbackClassifier)
     openai_response_generator = providers.Factory(OpenAiResponseGenerator)
-    template_response_generator = providers.Factory(TemplateResponseGenerator)
+    fallback_response_generator = providers.Factory(FallbackResponseGenerator)
     
     # Seleção dinâmica de implementações baseada na configuração
     classifier = providers.Selector(
@@ -29,7 +29,7 @@ class Container(containers.DeclarativeContainer):
     response_generator = providers.Selector(
         config.default_response_generator,
         openai=openai_response_generator,
-        template=template_response_generator
+        template=fallback_response_generator
     )
     
     # Configuração padrão

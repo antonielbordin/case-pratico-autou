@@ -1,6 +1,7 @@
 import requests
 from core.entities.email import Email
 from core.ports.classification import EmailClassifier
+from infrastructure.adapters.fallback_classifier import FallbackClassifier
 # from config.settings import HF_API_KEY
 
 class HuggingFaceClassifier(EmailClassifier):

@@ -1,6 +1,7 @@
 # import openai
 from core.entities.email import Email
 from core.ports.response_generation import ResponseGenerator
+from infrastructure.adapters.fallback_response_generator import FallbackResponseGenerator
 # from config.settings import OPENAI_API_KEY
 
 class OpenAiResponseGenerator(ResponseGenerator):
@@ -14,5 +15,5 @@ class OpenAiResponseGenerator(ResponseGenerator):
         
     except Exception as e:
       # Fallback para template
-      fallback = TemplateResponseGenerator()
+      fallback = FallbackResponseGenerator()
       return fallback.generate_response(email)

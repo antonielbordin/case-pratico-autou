@@ -1,7 +1,7 @@
 from core.entities.email import Email
 from core.ports.response_generation import ResponseGenerator
 
-class TemplateResponseGenerator(ResponseGenerator):
+class FallbackResponseGenerator(ResponseGenerator):
   """Gerador de resposta baseado em templates"""
   
   def generate_response(self, email: Email) -> Email:
