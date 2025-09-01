@@ -6,11 +6,14 @@ from infrastructure.adapters.huggingface_classifier import HuggingFaceClassifier
 from infrastructure.adapters.openai_response_generator import OpenAiResponseGenerator
 from infrastructure.adapters.file_processor import FileProcessorFactory
 
+from infrastructure.adapters.deepseek_classifier import DeepSeekClassifier
+from infrastructure.adapters.openai_classifier import OpenAIClassifier
+
 class EmailController:
   """Controlador para processamento de emails"""
 
   def __init__(self):
-    self.classifier = HuggingFaceClassifier()
+    self.classifier = OpenAIClassifier()
     self.response_generator = OpenAiResponseGenerator()
 
   def process_email(self):
