@@ -1,3 +1,4 @@
+import re
 import requests
 from deep_translator import GoogleTranslator
 from core.entities.email import Email
@@ -130,7 +131,7 @@ class HuggingFaceClassifier(EmailClassifier):
       # Fallback para outro classificador
       fallback = FallbackClassifier()
       return fallback.classify(email)
-
+ 
   def classify(self, email: Email) -> Email:
-    #return self._classifyXLMR(email)
-    return self._classifyBart(email)
+    return self._classifyXLMR(email)
+    #return self._classifyBart(email)

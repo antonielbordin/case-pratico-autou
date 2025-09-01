@@ -2,18 +2,18 @@ from flask import request, jsonify
 from core.entities.email import Email
 from core.use_cases.classification import ClassifyEmailUseCase
 from core.use_cases.response_generation import GenerateResponseUseCase
-from infrastructure.adapters.huggingface_classifier import HuggingFaceClassifier
 from infrastructure.adapters.openai_response_generator import OpenAiResponseGenerator
 from infrastructure.adapters.file_processor import FileProcessorFactory
 
-from infrastructure.adapters.deepseek_classifier import DeepSeekClassifier
-from infrastructure.adapters.openai_classifier import OpenAIClassifier
+# Import da factory
+from infrastructure.adapters.classifier_factory import get_classifier
 
 class EmailController:
   """Controlador para processamento de emails"""
 
   def __init__(self):
-    self.classifier = OpenAIClassifier()
+    self.classifier = get_classifier()  # Usa o padrão (huggingface)
+    # self.classifier = OpenAIClassifier()
     self.response_generator = OpenAiResponseGenerator()
 
   def process_email(self):
