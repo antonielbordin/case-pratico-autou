@@ -22,16 +22,18 @@ class ClaudeClassifier(EmailClassifier):
     try:
       API_URL = "https://api.anthropic.com/v1/messages"
       headers = {
-        "x-api-key": CLAUDE_API_KEY,
-        "anthropic-version": "2023-06-01",
+        "Authorization": f"Bearer {CLAUDE_API_KEY}",
         "Content-Type": "application/json"
       }
       
       prompt = f"""
       Classifique o seguinte e-mail como 'produtivo' ou 'improdutivo' para o ambiente de trabalho.
+      Um e-mail produtivo é aquele relacionado a tarefas, projetos, decisões ou informações relevantes para o trabalho.
+      Um e-mail improdutivo é aquele pessoal, de entretenimento, spam ou não relacionado ao trabalho.
+      
       Responda APENAS com JSON no formato: {{"classification": "produtivo" ou "improdutivo", "confidence": 0.0 a 1.0}}
       
-      E-mail:
+      E-mail para classificar:
       {email.content}
       """
       

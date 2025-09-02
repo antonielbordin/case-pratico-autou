@@ -39,8 +39,8 @@ class DeepSeekClassifier(EmailClassifier):
       payload = {
         "model": "deepseek-chat",
         "messages": [{"role": "user", "content": prompt}],
-        "temperature": 0.1,
-        "max_tokens": 100
+        "max_tokens": 100,
+        "temperature": 0.1
       }
       
       response = requests.post(API_URL, headers=headers, json=payload, timeout=30)

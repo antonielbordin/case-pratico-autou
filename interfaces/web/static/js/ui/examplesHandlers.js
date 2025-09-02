@@ -40,25 +40,25 @@ Há algum impedimento?
 Obrigado,
 Maria Santos`,
 
-    improdutivo1: `Assunto: Parabéns pelo Trabalho!
+    improdutivo1: `Assunto: Parabéns pelo Aniversário!
+
+Oi João,
+
+Queria te desejar muitas felicidades pelo seu aniversário! Espero que seu dia seja incrível, cheio de alegria e bons momentos com a família e os amigos.
+
+Vamos marcar um almoço para comemorar?
+
+Abraços,
+Carla Costa`,
+
+    improdutivo2: `Assunto: Mensagem de Agradecimento Especial
 
 Olá equipe,
 
-Gostaria de parabenizar a todos pelo excelente trabalho no último projeto. Ficou realmente incrível!
+Gostaria apenas de deixar registrado meu carinho e gratidão pelo apoio que recebi nos últimos dias. Vocês são incríveis e tornaram tudo muito mais leve.
 
-Estou muito orgulhoso da nossa equipe.
-
-Abraços,
-Carlos Oliveira`,
-
-    improdutivo2: `Assunto: Agradecimento
-
-Caros colegas,
-
-Quero agradecer a todos pelo apoio durante minha ausência. Vocês são demais!
-
-Um forte abraço,
-Ana Costa`
+Abraços calorosos,
+Mariana Lopes`
   };
 
   emailText.value = examples[type] || '';

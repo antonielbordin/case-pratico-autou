@@ -27,17 +27,20 @@ class OpenAIClassifier(EmailClassifier):
       
       prompt = f"""
       Classifique o seguinte e-mail como 'produtivo' ou 'improdutivo' para o ambiente de trabalho.
+      Um e-mail produtivo é aquele relacionado a tarefas, projetos, decisões ou informações relevantes para o trabalho.
+      Um e-mail improdutivo é aquele pessoal, de entretenimento, spam ou não relacionado ao trabalho.
+      
       Responda APENAS com JSON no formato: {{"classification": "produtivo" ou "improdutivo", "confidence": 0.0 a 1.0}}
       
-      E-mail:
+      E-mail para classificar:
       {email.content}
       """
       
       payload = {
         "model": "gpt-3.5-turbo",
         "messages": [{"role": "user", "content": prompt}],
-        "temperature": 0.1,
-        "max_tokens": 100
+        "max_tokens": 100,
+        "temperature": 0.1
       }
       
       response = requests.post(API_URL, headers=headers, json=payload, timeout=30)
