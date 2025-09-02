@@ -23,15 +23,6 @@ export async function processEmailInput(file, text) {
   return classifyEmail(emailContent, typeEmail, fileType);
 }
 
-function readFile(file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = (e) => resolve(e.target.result);
-    reader.onerror = () => reject(new Error('Erro ao ler arquivo'));
-    reader.readAsText(file);
-  });
-}
-
 async function fileToBase64(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();

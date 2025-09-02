@@ -24,7 +24,7 @@ export function displayResults(result) {
 
   classificationBadge.textContent = result.classification;
   classificationBadge.className = 'classification-badge ' + 
-    (result.classification === 'Produtivo' ? 'classified-productive' : 'classified-unproductive');
+    (result.classification === 'produtivo' ? 'classified-productive' : 'classified-unproductive');
   
   const confidencePercent = Math.round(result.confidence * 100);
   confidenceMeter.style.width = confidencePercent + '%';

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template
 from interfaces.web.controllers.email_controller import EmailController
 from config.settings import DEBUG
 
@@ -18,4 +18,4 @@ def process_email():
 
 if __name__ == '__main__':
     import os
-    app.run(host='0.0.0.0', port=int(os.getenv("PORT", 5000)), debug=os.getenv("FLASK_DEBUG") == "1")
+    app.run(host='0.0.0.0', port=int(os.getenv("PORT", 5000)), debug=os.getenv("FLASK_ENV") == "1")
