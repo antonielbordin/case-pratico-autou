@@ -17,4 +17,5 @@ def process_email():
     return email_controller.process_email()
 
 if __name__ == '__main__':
-    app.run(debug=DEBUG, host='0.0.0.0', port=5000)
+    import os
+    app.run(host='0.0.0.0', port=int(os.getenv("PORT", 5000)), debug=os.getenv("FLASK_DEBUG") == "1")
