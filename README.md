@@ -6,7 +6,10 @@ Um sistema inteligente de classificação de emails que determina automaticament
 
 ## 🎯 **Objetivo do Projeto**
 
-Este projeto implementa um sistema completo de classificação de emails usando **Arquitetura Limpa** (Clean Architecture) e **padrões de design**, demonstrando boas práticas de desenvolvimento de software aplicadas a problemas de **Inteligência Artificial**.
+Demonstrar um sistema completo de **classificação de e-mails** aplicando: 
+- **Arquitetura Limpa** (Clean Architecture) 
+- **Boas práticas de design de software**
+- **Modelos de NLP (Machine Learning e APIs externas)**
 
 ## ⚙️ **Funcionalidades**
 
@@ -21,86 +24,67 @@ Este projeto implementa um sistema completo de classificação de emails usando 
 
 ## 🏗️ **Arquitetura do Sistema**
 
-### Backend (Python/Flask)
-- Endpoint de renderização do template html
-- Endpoint de processamento do email
+A aplicação segue o padrão de **Clean Architecture**, separando responsabilidades em camadas:
 
-### Frontend (JavaScript/HTML/CSS)
-- Interface responsiva para upload de arquivos e texto
-- Exibição de resultados de classificação
+- **Core** → Entidades, portas (interfaces) e casos de uso  
+- **Infrastructure** → Adaptadores para IA (OpenAI, HuggingFace etc.), fallback e configuração  
+- **Interfaces** → API Flask + frontend web em HTML/JS  
+- **Tests** → Testes unitários e de integração
+
+### Estrutura de pastas
 
 ```
 📁 case-pratico-autou/
-├── 🧠 core/                                    # Camada de domínio
-│   ├── 📦 entities/
-│   │   └── 📧 email.py                        # Entidade Email
-│   ├── 🔌 ports/
-│   │   ├── 🎯 classification.py               # Interface de classificação
-│   │   ├── 📄 file_processor.py               # Interface de processamento de arquivos
-│   │   └── ✨ response_generation.py          # Interface de geração de respostas
-│   └── ⚙️ use_cases/
-│       ├── 🎯 classification.py               # Casos de uso de classificação
-│       └── ✨ response_generator.py           # Casos de uso de geração de respostas
+├── 🧠 core/   # Regras de negócio e domínio
+│   ├── entities/ # Entidades (Email)
+│   ├── ports/ # Interfaces (contratos)
+│   └── use_cases/ # Casos de uso
 │
-├── 🏭 infrastructure/                          # Camada de infraestrutura
-│   ├── 🔧 adapters/
-│   │   ├── 🤖 openai_classifier.py            # Classificador OpenAI
-│   │   ├── 🧪 deepseek_classifier.py          # Classificador DeepSeek
-│   │   ├── 🎭 claude_classifier.py            # Classificador Claude
-│   │   ├── 🤗 huggingface_classifier.py       # Classificador HuggingFace
-│   │   ├── 🛡️ fallback_classifier.py          # Classificador de fallback
-│   │   ├── 🤖 openai_response_generator.py    # Gerador de respostas OpenAI
-│   │   ├── 🧪 deepseek_response_generator.py  # Gerador de respostas DeepSeek
-│   │   ├── 🎭 claude_response_generator.py    # Gerador de respostas Claude
-│   │   ├── 🤗 huggingface_response_generator.py # Gerador de respostas HuggingFace
-│   │   ├── 🛡️ fallback_response_generator.py  # Gerador de respostas fallback
-│   │   ├── 🏭 classifier_factory.py           # Factory de classificadores
-│   │   ├── 🏭 response_generator_factory.py   # Factory de geradores de resposta
-│   │   └── 📄 file_processor.py               # Processador de arquivos
-│   └── ⚙️ config/
-│       └── 🔑 keywords.json                   # Palavras-chave de configuração
+├── 🏭 infrastructure/ # Implementações técnicas
+│   ├── adapters/ # Classificadores, geradores de resposta, fábricas
+│   └── config/ # Configurações (keywords.json, settings.py)
 │
-├── 🌐 interfaces/                              # Camada de interface
-│   └── 🕸️ web/
-│       ├── 🎮 controllers/
-│       │   └── 📧 email_controller.py         # Controlador de emails
-│       ├── 🎨 static/
-│       │   ├── 🎨 css/
-│       │   │   └── 💅 style.css               # Estilos CSS
-│       │   └── ⚡ js/
-│       │       ├── 🔧 adapters/
-│       │       │   └── 📧 emailProcessor.js   # Processador de email JS
-│       │       ├── 🧠 core/
-│       │       │   ├── 🎯 classifyEmail.js    # Classificação de email JS
-│       │       │   └── ✨ generateResponse.js # Geração de resposta JS
-│       │       ├── 🖼️ ui/
-│       │       │   ├── 🎛️ domHandlers.js      # Manipuladores DOM
-│       │       │   ├── 👂 eventListeners.js   # Event listeners
-│       │       │   └── 📝 examplesHandlers.js # Manipuladores de exemplos
-│       │       └── 🚀 index.js                # Arquivo principal JS
-│       └── 📑 templates/
-│           └── 🏠 index.html                  # Template principal
+├── 🌐 interfaces/ # Camada de interface
+│   └── web/ # API Flask + frontend (templates, static, controllers)
 │
-├── 🧪 tests/                                  # Camada de testes
-│   ├── 🔗 integration/                       # Testes de integração
-│   └── 🧩 unit/                              # Testes unitários
+├── 🧪 tests/ # Testes unitários e de integração
 │
-├── ⚙️ config/
-│   └── 🔧 settings.py                        # Configurações da aplicação
-│
-├── 🚀 app.py                                 # Aplicação principal Flask
-├── 📦 container.py                           # Container de dependências
-├── 🐳 docker-compose.yml                     # Configuração Docker Compose
-├── 🐳 Dockerfile                             # Configuração Docker
-├── 📜 LICENSE                                # Licença do projeto
-├── 📋 requirements.txt                       # Dependências Python
-├── 🐍 runtime.txt                            # Versão do Python
-├── 🔒 .env                                   # Variáveis de ambiente
-├── 🙈 .gitignore                             # Arquivos ignorados pelo Git
-├── 🎬 start.sh                               # Script de inicialização
-└── 📄 README.md                              # Documentação do projeto
+├── app.py # Entrada principal Flask
+├── container.py # Injeção de dependências
+├── requirements.txt # Dependências Python
+├── Dockerfile # Configuração Docker
+├── docker-compose.yml # Orquestração de containers
+├── .env # Variáveis de ambiente
+└── README.md # Documentação
+
 ```
 
+---
+
+## 🧠 Como Funciona
+
+1. **Recepção** → O usuário envia um e-mail (texto direto ou arquivo).  
+2. **Pré-processamento** → O texto é limpo (remoção de URLs, emails, caracteres especiais).  
+3. **Classificação**  
+   - Tentativa com modelo de IA como BART/XLM-RoBERTa via HuggingFace e (OpenAI, DeepSeek, etc.)  
+   - Se falhar ou a confiança for baixa, ativa o **fallback** por palavras-chave.  
+4. **Análise de Confiança** → Cada classificação recebe um score de confiança.  
+5. **Resposta** → Opcionalmente, um gerador de resposta automática é acionado.  
+6. **Exibição** → O resultado é retornado via **API** ou mostrado na **interface web**.  
+
+---
+
+ 
+
+## 🔄 **Fluxo de Processamento**
+
+  - Recepção: Upload de arquivo ou texto direto
+  - Pré-processamento: Extração e limpeza de conteúdo
+  - Classificação: Análise com múltiplos modelos de ML
+  - Geração de Resposta: Criação de resposta contextual
+  - Apresentação: Exibição dos resultados ao usuário
+
+ 
 ## 🚀 **Tecnologias Utilizadas**
 
 ### **Backend & API**
@@ -112,12 +96,12 @@ Este projeto implementa um sistema completo de classificação de emails usando 
 - **Hugging Face Transformers** - Modelos de ML
 - **Requests** - Cliente HTTP
 
-### Frontend
+### **Frontend**
 - **HTML5/CSS3** - Estrutura e estilo
 - **JavaScript ES6+** - Interatividade
 - **Fetch API** - Comunicação com backend
 
-### **Machine Learning & NLP**
+### **IA & NLP**
 - **HuggingFace Transformers** - Modelos de NLP
   - `facebook/bart-large-mnli` - Classificação zero-shot
   - `joeddav/xlm-roberta-large-xnli` - Classificação multilíngue
@@ -134,10 +118,12 @@ Este projeto implementa um sistema completo de classificação de emails usando 
 ## 📦 **Instalação e Configuração**
 
 ### **Pré-requisitos**
-- Python 3.8 ou superior
-- Conta no HuggingFace (para API key)
-- pip ou conda para gerenciamento de pacotes
+- Python 3.8+
+- Conta na OpenAI e/ou HuggingFace (API Key)
+- pip para gerenciamento de pacotes
 - Git
+
+### **Etapas**
 
 ### **1. Clonar o Repositório**
 ```bash
@@ -147,14 +133,10 @@ cd case-pratico-autou
 
 ### **2. Criar Ambiente Virtual**
 ```bash
-# Com venv
+# Criar ambiente virtual
 python -m venv venv
 source venv/bin/activate  # Linux/Mac
 venv\Scripts\activate     # Windows
-
-# Ou com conda
-conda create -n autou-env python=3.8
-conda activate autou-env
 ```
 
 ### **3. Instalar Dependências**
@@ -171,40 +153,53 @@ FLASK_ENV=development
 FLASK_DEBUG=True
 ```
 
-### **5. Obter API Key do HuggingFace**
-1. Acesse [HuggingFace](https://huggingface.co/)
-2. Faça login/cadastro
-3. Vá em Settings → Access Tokens
-4. Gere um novo token
-5. Adicione ao arquivo `.env`
+## 🔧 **Configurações Avançadas**
+
+### **Alternar entre Modelos**
+No arquivo `infrastructure/adapters/huggingface_classifier.py`:
+```python
+def classify(self, email: Email) -> Email:
+    # Escolha o modelo desejado:
+    return self._classifyBart(email)             # BART (padrão)
+    # return self._classifyXLMR(email)           # XLM-RoBERTa
+    # return self.classify_email_improved(email) # Versão otimizada
+```
+
+### **Personalizar Palavras-chave**
+Edite as listas `work_keywords` e `personal_keywords` nos métodos de classificação.
 
 ## 🎯  **Como Usar**
 
-### **Executar a Aplicação**
+### **Rodar a Aplicação**
 ```bash
 python app.py
 ```
 
 ### **Via Interface Web**
 
-    Acesse http://localhost:5000
+ 1. Acesse http://localhost:5000
+ 2. Selecione um arquivo (PDF/TXT) ou digite texto diretamente
+ 3. Clique em "Processar Email"
+ 4. Visualize a classificação e resposta sugerida
+ 5. Copie a resposta sugerida se nescessário
 
-    Selecione um arquivo (PDF/TXT) ou digite texto diretamente
-
-    Clique em "Processar Email"
-
-    Visualize a classificação e resposta sugerida
-
-
-### **Testar via API**
+### **Via API**
 ```bash
-# Exemplo de requisição
+# Exemplo de requisição com arquivo
 curl -X POST http://localhost:5000/process-email \
   -H "Content-Type: application/json" \
   -d '{
     "content": "base64_encoded_content",
     "type": "file",
     "file_name": "document.pdf"
+  }'
+
+# Exemplo de requisição com texto
+curl -X POST http://localhost:5000/process-email \
+  -H "Content-Type: application/json" \
+  -d '{
+    "content": "seu texto aqui",
+    "type": "text"
   }'
 ```
 
@@ -217,22 +212,37 @@ curl -X POST http://localhost:5000/process-email \
 }
 ```
 
-## 🧠 **Como Funciona**
+## 📚 **Recursos Adicionais**
 
-### **1. Pré-processamento**
-- Remove URLs, emails e números desnecessários
-- Limita texto a ~400 palavras (limite de tokens)
-- Normaliza caracteres especiais
+- [HuggingFace Models](https://huggingface.co/models)
+- [Clean Architecture em Python](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
+- [Flask Documentation](https://flask.palletsprojects.com/)
+- [BART Model Paper](https://arxiv.org/abs/1910.13461)
+- [Email Classifier AI - Online](https://projects-autou.onrender.com/)
 
-### **2. Extração de Características**
-- Identifica palavras-chave de trabalho: `projeto`, `cliente`, `prazo`, `meeting`, `deadline`
-- Identifica palavras-chave pessoais: `família`, `férias`, `festa`, `family`, `vacation`
+## 📄 **Licença**
 
-### **3. Classificação Inteligente**
-- Usa modelos BART/XLM-RoBERTa via HuggingFace
-- Labels descritivos para melhor contexto
-- Ajuste de confiança baseado em palavras-chave
+Este projeto está sob a licença MIT. 
+Veja o arquivo [LICENSE](LICENSE) para detalhes.
 
-### **4. Sistema de Fallback**
-- Se a API falhar, usa classificação baseada em regras
-- Garante 100% de disponibilidade do serviço
+## 📈 **Melhorias Futuras**
+- Treinar modelos customizados
+- Melhorar UI com Svelte ou Vue.js
+- Documentação da API com Swagger/OpenAPI
+- Monitoramento de métricas (Prometheus/Grafana)
+
+## 👨‍💻 **Autor**
+
+**Antoniel Bordin**
+- GitHub: [@antonielbordin](https://github.com/antonielbordin)
+- LinkedIn: [Antoniel Bordin](https://linkedin.com/in/antonielbordin)
+
+## 🙏 **Agradecimentos**
+
+- **AutoU** pela oportunidade de desenvolver este case prático
+- **HuggingFace** pelos modelos de ML disponibilizados
+- **Comunidade Python** pelas bibliotecas utilizadas
+
+---
+
+⭐ **Se este projeto foi útil para você, deixe uma estrela no GitHub!**
